@@ -1,0 +1,40 @@
+@extends('layouts.app')
+@section('title', 'Data Mutasi')
+
+@section('content')
+<h1 class="text-2xl font-semibold text-slate-900 mb-6">Data Mutasi Siswa</h1>
+
+<div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+    <table class="w-full text-sm">
+        <thead class="text-left text-slate-500 border-b border-slate-100">
+            <tr>
+                <th class="px-5 py-3 font-medium">Nama Siswa</th>
+                <th class="px-5 py-3 font-medium">NISN</th>
+                <th class="px-5 py-3 font-medium">Kecamatan Domisili</th>
+                <th class="px-5 py-3 font-medium">Sekolah Asal</th>
+                <th class="px-5 py-3 font-medium">Sekolah Tujuan</th>
+                <th class="px-5 py-3 font-medium">Tanggal</th>
+                <th class="px-5 py-3 font-medium">Sekolah Pencatat</th>
+                <th class="px-5 py-3 font-medium">Diinput Oleh</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($data as $m)
+                <tr class="border-b border-slate-50 last:border-0">
+                    <td class="px-5 py-3 font-medium text-slate-900">{{ $m->nama_siswa }}</td>
+                    <td class="px-5 py-3 text-slate-600">{{ $m->nisn ?? $m->nik ?? '—' }}</td>
+                    <td class="px-5 py-3 text-slate-600">{{ $m->kecamatanDomisili->nama_kecamatan }}</td>
+                    <td class="px-5 py-3 text-slate-600">{{ $m->sekolah_asal }}</td>
+                    <td class="px-5 py-3 text-slate-600">{{ $m->sekolah_tujuan }}</td>
+                    <td class="px-5 py-3 text-slate-600">{{ $m->tanggal_mutasi->translatedFormat('d F Y') }}</td>
+                    <td class="px-5 py-3 text-slate-600">{{ $m->sekolahPencatat->nama_sekolah ?? '—' }}</td>
+                    <td class="px-5 py-3 text-slate-600">{{ $m->inputOleh->nama_lengkap ?? '—' }}</td>
+                </tr>
+            @empty
+                <tr><td colspan="8" class="px-5 py-10 text-center text-slate-400">Belum ada data mutasi.</td></tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+<div class="mt-4">{{ $data->links() }}</div>
+@endsection

@@ -1,0 +1,1 @@
+@extends('errors.dasar', ['kode' => '503', 'judul' => 'Koneksi ke basis data terganggu', 'pesan' => 'Server tidak dapat terhubung ke basis data. Data Anda aman. Coba muat ulang dalam beberapa menit.'])
